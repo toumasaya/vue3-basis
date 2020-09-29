@@ -11,7 +11,7 @@
         <div class="column is-4">
           <h3 class="title aside-title is-size-4 has-text-grey">
             <span>Your Resources</span>
-            <span class="badge">6</span>
+            <span class="badge">{{ resourceLength }}</span>
           </h3>
           <nav class="panel">
             <div class="panel-block">
@@ -66,6 +66,11 @@ export default {
         },
       ],
     };
+  },
+  computed: {
+    resourceLength() {
+      return this.resources.length;
+    },
   },
 };
 </script>
