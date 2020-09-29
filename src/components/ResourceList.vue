@@ -1,26 +1,11 @@
 <template>
-  <a class="panel-block">
+  <a class="panel-block" v-for="resource in resources" :key="resource.id">
     <header class="header">
-      <h3 class="title is-size-6">Resource 1</h3>
-      <span class="tag is-info">Type</span>
+      <h3 class="title is-size-6">{{ resource.title }}</h3>
+      <span class="tag is-info">{{ resource.type }}</span>
     </header>
-    <p class="desc">Brief description</p>
+    <p class="desc">{{ resource.description }}</p>
   </a>
-  <a class="panel-block">
-    <header class="header">
-      <h3 class="title is-size-6">Resource 2</h3>
-      <span class="tag is-info">Type</span>
-    </header>
-    <p class="desc">Brief description</p>
-  </a>
-  <a class="panel-block">
-    <header class="header">
-      <h3 class="title is-size-6">Resource 3</h3>
-      <span class="tag is-info">Type</span>
-    </header>
-    <p class="desc">Brief description</p>
-  </a>
-  {{ resources }}
 </template>
 
 <script>
