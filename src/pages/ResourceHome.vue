@@ -4,9 +4,12 @@
       <ResourceHeader />
       <div class="resource-content columns">
         <div class="column is-8">
-          <h2 class="title is-size-4">Updated Resource</h2>
-          <ResourceDetail />
-          <!-- <ResourceUpdate /> -->
+          <h2 class="title is-size-4">
+            Updated Resource
+            <button @click="toggleView" class="button">Toggle</button>
+          </h2>
+          <ResourceDetail v-if="isDetailView" />
+          <ResourceUpdate v-else />
         </div>
         <div class="column is-4">
           <h3 class="title aside-title is-size-4 has-text-grey">
@@ -30,7 +33,7 @@ import ResourceHeader from '@/components/ResourceHeader';
 import ResourceSearch from '@/components/ResourceSearch';
 import ResourceList from '@/components/ResourceList';
 import ResourceDetail from '@/components/ResourceDetail';
-// import ResourceUpdate from '@/components/ResourceUpdate';
+import ResourceUpdate from '@/components/ResourceUpdate';
 
 export default {
   components: {
@@ -38,10 +41,11 @@ export default {
     ResourceSearch,
     ResourceList,
     ResourceDetail,
-    // ResourceUpdate,
+    ResourceUpdate,
   },
   data() {
     return {
+      isDetailView: true,
       resources: [
         {
           id: '1',
@@ -70,6 +74,11 @@ export default {
   computed: {
     resourceLength() {
       return this.resources.length;
+    },
+  },
+  methods: {
+    toggleView() {
+      this.isDetailView = !this.isDetailView;
     },
   },
 };
