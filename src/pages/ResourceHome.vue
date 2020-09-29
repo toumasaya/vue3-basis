@@ -22,6 +22,7 @@
             </div>
             <ResourceList :resources="resources" />
           </nav>
+          <button @click="addResource" class="button is-primary">Add Resource</button>
         </div>
       </div>
     </div>
@@ -79,6 +80,23 @@ export default {
   methods: {
     toggleView() {
       this.isDetailView = !this.isDetailView;
+    },
+    addResource() {
+      const id =
+        '_' +
+        Math.random()
+          .toString(36)
+          .slice(2);
+      const type = ['book', 'video', 'blog'][Math.floor(Math.random() * 3)];
+      const newResource = {
+        id,
+        title: `Resource ${id} title`,
+        description: `Resource ${id} desc`,
+        link: '',
+        type,
+      };
+
+      this.resources.unshift(newResource);
     },
   },
 };
