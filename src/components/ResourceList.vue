@@ -20,10 +20,18 @@
     </header>
     <p class="desc">Brief description</p>
   </a>
+  {{ resources }}
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    resources: {
+      type: Array,
+      default: () => [],
+    },
+  },
+};
 </script>
 
 <style lang="sass" scoped>
