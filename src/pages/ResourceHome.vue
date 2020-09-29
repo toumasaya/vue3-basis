@@ -6,7 +6,9 @@
         <div class="column is-8">
           <h2 class="title is-size-4">
             Updated Resource
-            <button @click="toggleView" class="button">Toggle</button>
+            <button @click="toggleView" :class="toggleBtnClass" class="button">
+              {{ isDetailView ? 'Update' : 'Detail' }}
+            </button>
           </h2>
           <ResourceDetail v-if="isDetailView" />
           <ResourceUpdate v-else />
@@ -16,11 +18,13 @@
             <span>Your Resources</span>
             <span class="badge">{{ resourceLength }}</span>
           </h3>
-          <nav class="panel">
+          <nav class="panel ">
             <div class="panel-block">
               <ResourceSearch />
             </div>
-            <ResourceList :resources="resources" />
+            <div class="resource-list">
+              <ResourceList :resources="resources" />
+            </div>
           </nav>
           <button @click="addResource" class="button is-primary">Add Resource</button>
         </div>
@@ -76,6 +80,9 @@ export default {
     resourceLength() {
       return this.resources.length;
     },
+    toggleBtnClass() {
+      return this.isDetailView ? 'is-warning' : '';
+    },
   },
   methods: {
     toggleView() {
@@ -122,4 +129,8 @@ export default {
   display: flex
   justify-content: space-between
   align-items: center
+
+.resource-list
+  max-height: 360px
+  overflow-y: auto
 </style>

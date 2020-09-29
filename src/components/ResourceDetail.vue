@@ -12,10 +12,11 @@
         </p>
         <span class="tag is-light">Type</span>
       </div>
-      <footer class="card-footer">
-        <a href="#" class="card-footer-item">Edit</a>
-      </footer>
     </div>
+    <footer class="card-footer">
+      <a href="#" class="card-footer-item is-primary">Edit</a>
+      <a href="#" class="card-footer-item">Cancel</a>
+    </footer>
   </div>
 </template>
 

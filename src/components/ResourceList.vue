@@ -2,7 +2,7 @@
   <a class="panel-block" v-for="resource in resources" :key="resource.id">
     <header class="header">
       <h3 class="title is-size-6">{{ resource.title }}</h3>
-      <span class="tag is-info">{{ resource.type }}</span>
+      <span class="tag is-link">{{ resource.type }}</span>
     </header>
     <p class="desc">{{ resource.description }}</p>
   </a>
