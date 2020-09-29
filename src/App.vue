@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import ResourceHome from '@/components/pages/ResourceHome';
+import ResourceHome from '@/pages/ResourceHome';
 
 export default {
   name: 'App',
