@@ -1,5 +1,5 @@
 <template>
-  <a class="panel-block" v-for="resource in resources" :key="resource.id">
+  <a v-for="resource in resources" :key="resource.id" @click="onItemClick(resource)" class="panel-block">
     <header class="header">
       <h3 class="title is-size-6">{{ resource.title }}</h3>
       <span class="tag is-link">{{ resource.type }}</span>
@@ -14,6 +14,12 @@ export default {
     resources: {
       type: Array,
       default: () => [],
+    },
+  },
+  emits: ['on-item-click'],
+  methods: {
+    onItemClick(resource) {
+      this.$emit('on-item-click', resource);
     },
   },
 };

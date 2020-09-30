@@ -5,12 +5,12 @@
       <div class="resource-content columns">
         <div class="column is-8">
           <h2 class="title is-size-4">
-            Updated Resource
+            Resource {{ selectedResource?.id }}
             <button @click="toggleView" :class="toggleBtnClass" class="button">
               {{ isDetailView ? 'Update' : 'Detail' }}
             </button>
           </h2>
-          <ResourceDetail v-if="isDetailView" />
+          <ResourceDetail v-if="isDetailView" :resource="selectedResource" />
           <ResourceUpdate v-else />
         </div>
         <div class="column is-4">
@@ -23,7 +23,7 @@
               <ResourceSearch />
             </div>
             <div class="resource-list">
-              <ResourceList :resources="resources" />
+              <ResourceList :resources="resources" @on-item-click="selectResource" />
             </div>
           </nav>
           <button @click="addResource" class="button is-primary">Add Resource</button>
@@ -51,6 +51,7 @@ export default {
   data() {
     return {
       isDetailView: true,
+      selectedResource: null,
       resources: [
         {
           id: '1',
@@ -104,6 +105,9 @@ export default {
       };
 
       this.resources.unshift(newResource);
+    },
+    selectResource(selectedResource) {
+      this.selectedResource = selectedResource;
     },
   },
 };
