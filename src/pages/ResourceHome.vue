@@ -1,63 +1,57 @@
 <template>
-  <div class="section">
-    <div class="container">
-      <ResourceHeader />
-      <div class="resource-content columns">
-        <div class="column is-8">
-          <h2 class="title is-size-4">
-            Resource {{ activeResource?._id }}
-            <template v-if="hasResources">
-              <button
-                @click="toggleView"
-                :class="toggleBtnClass"
-                class="button mx-3"
-              >
-                {{ isDetailView ? 'Update' : 'Detail' }}
-              </button>
-              <ResourceDelete
-                @on-resource-delete="
-                  hydrateResource($event, 'delete');
-                  !hasResources ? (isDetailView = true) : null;
-                "
-                :activeId="activeResource?._id"
-              />
-            </template>
-          </h2>
-          <ResourceDetail v-if="isDetailView" :resource="activeResource" />
-          <ResourceUpdate
-            v-else
-            :resource="activeResource"
-            @on-resource-update="hydrateResource($event, 'update')"
+  <div class="resource-content columns">
+    <div class="column is-8">
+      <h2 class="title is-size-4">
+        Resource {{ activeResource?._id }}
+        <template v-if="hasResources">
+          <button
+            @click="toggleView"
+            :class="toggleBtnClass"
+            class="button mx-3"
+          >
+            {{ isDetailView ? 'Update' : 'Detail' }}
+          </button>
+          <ResourceDelete
+            @on-resource-delete="
+              hydrateResource($event, 'delete');
+              !hasResources ? (isDetailView = true) : null;
+            "
+            :activeId="activeResource?._id"
+          />
+        </template>
+      </h2>
+      <ResourceDetail v-if="isDetailView" :resource="activeResource" />
+      <ResourceUpdate
+        v-else
+        :resource="activeResource"
+        @on-resource-update="hydrateResource($event, 'update')"
+      />
+    </div>
+    <div class="column is-4">
+      <h3 class="title aside-title is-size-4 has-text-grey">
+        <span>Your Resources</span>
+        <span class="badge">{{ resourceLength }}</span>
+      </h3>
+      <nav class="panel ">
+        <div class="panel-block">
+          <ResourceSearch />
+        </div>
+        <div class="resource-list">
+          <ResourceList
+            :resources="resources"
+            :activeId="activeResource?._id"
+            @on-item-click="selectResource"
           />
         </div>
-        <div class="column is-4">
-          <h3 class="title aside-title is-size-4 has-text-grey">
-            <span>Your Resources</span>
-            <span class="badge">{{ resourceLength }}</span>
-          </h3>
-          <nav class="panel ">
-            <div class="panel-block">
-              <ResourceSearch />
-            </div>
-            <div class="resource-list">
-              <ResourceList
-                :resources="resources"
-                :activeId="activeResource?._id"
-                @on-item-click="selectResource"
-              />
-            </div>
-          </nav>
-          <!-- <button @click="addResource" class="button is-primary">
-            Add Resource
-          </button> -->
-        </div>
-      </div>
+      </nav>
+      <!-- <button @click="addResource" class="button is-primary">
+        Add Resource
+      </button> -->
     </div>
   </div>
 </template>
 
 <script>
-import ResourceHeader from '@/components/ResourceHeader';
 import ResourceSearch from '@/components/ResourceSearch';
 import ResourceList from '@/components/ResourceList';
 import ResourceDetail from '@/components/ResourceDetail';
@@ -67,7 +61,6 @@ import { fetchResources } from '@/actions';
 
 export default {
   components: {
-    ResourceHeader,
     ResourceSearch,
     ResourceList,
     ResourceDetail,
@@ -126,10 +119,6 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.app-header
-  text-align: center
-  margin-bottom: 2rem
-
 .badge
   display: inline-flex
   justify-content: center

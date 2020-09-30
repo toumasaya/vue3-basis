@@ -1,16 +1,25 @@
 <template>
-  <resource-home />
+  <div class="section">
+    <div class="container">
+      <ResourceHeader />
+      <router-view />
+    </div>
+  </div>
 </template>
 
 <script>
-import ResourceHome from '@/pages/ResourceHome';
+import ResourceHeader from '@/components/ResourceHeader';
 
 export default {
   name: 'App',
   components: {
-    ResourceHome,
+    ResourceHeader,
   },
 };
 </script>
 
-<style></style>
+<style lang="sass">
+.app-header
+  text-align: center
+  margin-bottom: 2rem
+</style>
