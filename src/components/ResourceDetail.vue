@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!resource?.id" class="card">
+  <div v-if="!resource?._id" class="card">
     <div class="card-content">
       <div class="content">
         <p>No resource is selected...</p>

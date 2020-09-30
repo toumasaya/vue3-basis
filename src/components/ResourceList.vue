@@ -1,7 +1,7 @@
 <template>
   <a
     v-for="resource in resources"
-    :key="resource.id"
+    :key="resource._id"
     @click="onItemClick(resource)"
     :class="['panel-block', activeItemClass(resource)]"
   >
@@ -27,7 +27,7 @@ export default {
       // return function(resource) {
       //   return resource.id === this.activeId ? 'is-active' : '';
       // };
-      return (resource) => (resource.id === this.activeId ? 'is-active' : '');
+      return (resource) => (resource._id === this.activeId ? 'is-active' : '');
     },
   },
   emits: ['on-item-click'],

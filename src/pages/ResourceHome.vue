@@ -5,7 +5,7 @@
       <div class="resource-content columns">
         <div class="column is-8">
           <h2 class="title is-size-4">
-            Resource {{ activeResource?.id }}
+            Resource {{ activeResource?._id }}
             <button @click="toggleView" :class="toggleBtnClass" class="button">
               {{ isDetailView ? 'Update' : 'Detail' }}
             </button>
@@ -25,7 +25,7 @@
             <div class="resource-list">
               <ResourceList
                 :resources="resources"
-                :activeId="activeResource?.id"
+                :activeId="activeResource?._id"
                 @on-item-click="selectResource"
               />
             </div>
@@ -63,8 +63,8 @@ export default {
     };
   },
   async created() {
-    const response = await fetchResources();
-    console.log(response);
+    const resources = await fetchResources();
+    this.resources = resources;
   },
   computed: {
     resourceLength() {
