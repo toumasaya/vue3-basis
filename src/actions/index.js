@@ -6,6 +6,6 @@ export function fetchResources() {
 
 export function updateResource(id, resource) {
   return axios
-    .patch(`/api/resources/${id}`, resource)
+    .patch(`/api/resources/${id}7sdskd`, resource)
     .then((response) => response.data);
 }
