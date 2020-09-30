@@ -13,13 +13,16 @@
             >
               {{ isDetailView ? 'Update' : 'Detail' }}
             </button>
-            <ResourceDelete :activeId="activeResource?._id" />
+            <ResourceDelete
+              @on-resource-delete="hydrateResource($event, 'delete')"
+              :activeId="activeResource?._id"
+            />
           </h2>
           <ResourceDetail v-if="isDetailView" :resource="activeResource" />
           <ResourceUpdate
             v-else
             :resource="activeResource"
-            @on-resource-update="hydrateResource"
+            @on-resource-update="hydrateResource($event, 'update')"
           />
         </div>
         <div class="column is-4">
@@ -117,10 +120,16 @@ export default {
     selectResource(selectedResource) {
       this.selectedResource = selectedResource;
     },
-    hydrateResource(newResource) {
+    hydrateResource(newResource, operation) {
       const index = this.resources.findIndex((r) => r._id === newResource._id);
-      this.resources[index] = newResource;
-      this.selectResource(newResource);
+
+      if (operation === 'update') {
+        this.resources[index] = newResource;
+        this.selectResource(newResource);
+      } else {
+        this.resources.splice(index, 1);
+        this.selectResource(this.resources[0] || null);
+      }
     },
   },
 };
