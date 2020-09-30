@@ -111,8 +111,9 @@ export default {
       this.selectedResource = selectedResource;
     },
     hydrateResource(newResource) {
-      console.log('hydrate');
-      console.log(newResource);
+      const index = this.resources.findIndex((r) => r._id === newResource._id);
+      this.resources[index] = newResource;
+      this.selectResource(newResource);
     },
   },
 };
