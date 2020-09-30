@@ -4,7 +4,7 @@ export function fetchResources() {
   return axios.get('/api/resources').then((response) => response.data);
 }
 
-export function updateResource(id, resource) {
+export function updateResourceAPI(id, resource) {
   return (
     axios
       // .patch(`/api/resources/${id}7sdskd`, resource)

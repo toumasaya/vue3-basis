@@ -15,81 +15,25 @@
     </header>
     <div class="card-content">
       <div class="content">
-        <form @submit.prevent="submitForm">
-          <div class="field">
-            <label class="label">Title</label>
-            <div class="control">
-              <input
-                v-model="uResource.title"
-                class="input"
-                type="text"
-                placeholder="Resource title here..."
-              />
-            </div>
-          </div>
-          <div class="field">
-            <label class="label">Description</label>
-            <div class="control">
-              <textarea
-                v-model="uResource.description"
-                class="textarea"
-                placeholder="Resource description..."
-              ></textarea>
-            </div>
-          </div>
-          <div class="field">
-            <label class="label">Type</label>
-            <div class="control">
-              <div class="select">
-                <select v-model="uResource.type">
-                  <option
-                    v-for="resourceType in resourceTypes"
-                    :key="resourceType"
-                    :value="resourceType"
-                    >{{ resourceType }}</option
-                  >
-                </select>
-              </div>
-            </div>
-          </div>
-          <div class="field">
-            <label class="label">Link</label>
-            <div class="control">
-              <input
-                v-model="uResource.link"
-                class="input"
-                type="text"
-                placeholder="Resource link..."
-              />
-            </div>
-          </div>
-          <div class="field is-grouped">
-            <div class="control">
-              <button type="submit" class="button is-primary">Submit</button>
-            </div>
-            <!-- <div class="control">
-              <button class="button is-grey is-light">Cancel</button>
-            </div> -->
-          </div>
-        </form>
+        <ResourceForm
+          :alert="alert"
+          :resource="resource"
+          @on-submit-form="updateResource"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { updateResource } from '@/actions';
+import { updateResourceAPI } from '@/actions';
 import alertMixin from '@/mixins/alert';
+import ResourceForm from '@/components/ResourceForm';
 
 export default {
+  components: { ResourceForm },
   props: {
     resource: Object,
-  },
-  data() {
-    return {
-      uResource: { ...this.resource },
-      resourceTypes: ['book', 'video', 'blog'],
-    };
   },
   mixins: [alertMixin],
   beforeUnmount() {
@@ -102,16 +46,12 @@ export default {
         this.clearAlertTimeout();
         this.alert = this.initAlert();
       }
-      this.uResource = { ...newResource };
     },
   },
   methods: {
-    async submitForm() {
+    async updateResource(resource) {
       try {
-        const updatedResource = await updateResource(
-          this.uResource._id,
-          this.uResource
-        );
+        const updatedResource = await updateResourceAPI(resource._id, resource);
         this.$emit('on-resource-update', updatedResource);
         this.setAlert('success', 'Resource is updated! :)');
       } catch (errorMessage) {
