@@ -7,7 +7,7 @@
     </header>
     <div class="card-content">
       <div class="content">
-        <form action="">
+        <form @submit.prevent="submitForm">
           <div class="field">
             <label class="label">Title</label>
             <div class="control">
@@ -54,11 +54,11 @@
           </div>
           <div class="field is-grouped">
             <div class="control">
-              <button class="button is-primary">Submit</button>
+              <button type="submit" class="button is-primary">Submit</button>
             </div>
-            <div class="control">
+            <!-- <div class="control">
               <button class="button is-grey is-light">Cancel</button>
-            </div>
+            </div> -->
           </div>
         </form>
       </div>
@@ -75,6 +75,16 @@ export default {
     return {
       uResource: { ...this.resource },
     };
+  },
+  watch: {
+    resource(newResource) {
+      this.uResource = { ...newResource };
+    },
+  },
+  methods: {
+    submitForm() {
+      alert(JSON.stringify(this.uResource));
+    },
   },
 };
 </script>
