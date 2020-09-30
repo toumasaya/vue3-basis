@@ -16,7 +16,7 @@ export function updateResource(id, resource) {
 
 export function deleteResourceAPI(id) {
   return axios
-    .patch(`/api/resources/${id}`)
+    .delete(`/api/resources/${id}`)
     .then((response) => response.data)
     .catch((error) => Promise.reject(error?.response?.data));
 }
