@@ -6,17 +6,22 @@
         <div class="column is-8">
           <h2 class="title is-size-4">
             Resource {{ activeResource?._id }}
-            <button
-              @click="toggleView"
-              :class="toggleBtnClass"
-              class="button mx-3"
-            >
-              {{ isDetailView ? 'Update' : 'Detail' }}
-            </button>
-            <ResourceDelete
-              @on-resource-delete="hydrateResource($event, 'delete')"
-              :activeId="activeResource?._id"
-            />
+            <template v-if="hasResources">
+              <button
+                @click="toggleView"
+                :class="toggleBtnClass"
+                class="button mx-3"
+              >
+                {{ isDetailView ? 'Update' : 'Detail' }}
+              </button>
+              <ResourceDelete
+                @on-resource-delete="
+                  hydrateResource($event, 'delete');
+                  !hasResources ? (isDetailView = true) : null;
+                "
+                :activeId="activeResource?._id"
+              />
+            </template>
           </h2>
           <ResourceDetail v-if="isDetailView" :resource="activeResource" />
           <ResourceUpdate
@@ -42,9 +47,9 @@
               />
             </div>
           </nav>
-          <button @click="addResource" class="button is-primary">
+          <!-- <button @click="addResource" class="button is-primary">
             Add Resource
-          </button>
+          </button> -->
         </div>
       </div>
     </div>
@@ -87,35 +92,20 @@ export default {
     toggleBtnClass() {
       return this.isDetailView ? 'is-black' : '';
     },
-    hasResource() {
+    hasResources() {
       return this.resourceLength > 0;
     },
     activeResource() {
       return (
-        this.selectedResource || (this.hasResource && this.resources[0]) || null
+        this.selectedResource ||
+        (this.hasResources && this.resources[0]) ||
+        null
       );
     },
   },
   methods: {
     toggleView() {
       this.isDetailView = !this.isDetailView;
-    },
-    addResource() {
-      const id =
-        '_' +
-        Math.random()
-          .toString(36)
-          .slice(2);
-      const type = ['book', 'video', 'blog'][Math.floor(Math.random() * 3)];
-      const newResource = {
-        id,
-        title: `Resource ${id} title`,
-        description: `Resource ${id} desc`,
-        link: '',
-        type,
-      };
-
-      this.resources.unshift(newResource);
     },
     selectResource(selectedResource) {
       this.selectedResource = selectedResource;
