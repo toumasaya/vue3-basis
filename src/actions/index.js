@@ -13,3 +13,10 @@ export function updateResource(id, resource) {
       .catch((error) => Promise.reject(error?.response?.data))
   );
 }
+
+export function deleteResourceAPI(id) {
+  return axios
+    .patch(`/api/resources/${id}`)
+    .then((response) => response.data)
+    .catch((error) => Promise.reject(error?.response?.data));
+}

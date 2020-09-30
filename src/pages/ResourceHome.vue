@@ -6,9 +6,14 @@
         <div class="column is-8">
           <h2 class="title is-size-4">
             Resource {{ activeResource?._id }}
-            <button @click="toggleView" :class="toggleBtnClass" class="button">
+            <button
+              @click="toggleView"
+              :class="toggleBtnClass"
+              class="button mx-3"
+            >
               {{ isDetailView ? 'Update' : 'Detail' }}
             </button>
+            <ResourceDelete :activeId="activeResource?._id" />
           </h2>
           <ResourceDetail v-if="isDetailView" :resource="activeResource" />
           <ResourceUpdate
@@ -49,6 +54,7 @@ import ResourceSearch from '@/components/ResourceSearch';
 import ResourceList from '@/components/ResourceList';
 import ResourceDetail from '@/components/ResourceDetail';
 import ResourceUpdate from '@/components/ResourceUpdate';
+import ResourceDelete from '@/components/ResourceDelete';
 import { fetchResources } from '@/actions';
 
 export default {
@@ -58,6 +64,7 @@ export default {
     ResourceList,
     ResourceDetail,
     ResourceUpdate,
+    ResourceDelete,
   },
   data() {
     return {
@@ -75,7 +82,7 @@ export default {
       return this.resources.length;
     },
     toggleBtnClass() {
-      return this.isDetailView ? 'is-warning' : '';
+      return this.isDetailView ? 'is-black' : '';
     },
     hasResource() {
       return this.resourceLength > 0;
