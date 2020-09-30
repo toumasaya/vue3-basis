@@ -113,8 +113,8 @@ export default {
         );
         this.$emit('on-resource-update', updatedResource);
         this.setAlert('success', 'Resource is updated! :)');
-      } catch (error) {
-        this.setAlert('error', error?.message);
+      } catch (errorMessage) {
+        this.setAlert('error', errorMessage);
       }
     },
   },

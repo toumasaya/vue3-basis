@@ -5,7 +5,11 @@ export function fetchResources() {
 }
 
 export function updateResource(id, resource) {
-  return axios
-    .patch(`/api/resources/${id}7sdskd`, resource)
-    .then((response) => response.data);
+  return (
+    axios
+      // .patch(`/api/resources/${id}7sdskd`, resource)
+      .patch(`/api/resources/${id}`, resource)
+      .then((response) => response.data)
+      .catch((error) => Promise.reject(error?.response?.data))
+  );
 }
