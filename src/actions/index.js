@@ -4,6 +4,12 @@ export function fetchResources() {
   return axios.get('/api/resources').then((response) => response.data);
 }
 
+export function fetchResourceByIdAPI(resourceID) {
+  return axios
+    .get(`/api/resources/${resourceID}`)
+    .then((response) => response.data);
+}
+
 export function createResourceAPI(resource) {
   return axios
     .post('/api/resources', resource)
