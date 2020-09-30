@@ -59,29 +59,7 @@ export default {
     return {
       isDetailView: true,
       selectedResource: null,
-      resources: [
-        {
-          id: '1',
-          title: 'Resource 1',
-          description: 'lalala lalalalal',
-          type: 'book',
-          link: '',
-        },
-        {
-          id: '2',
-          title: 'Resource 2',
-          description: 'wawawawa',
-          type: 'video',
-          link: '',
-        },
-        {
-          id: '3',
-          title: 'Resource 3',
-          description: 'hahaha hahahahhaha',
-          type: 'blog',
-          link: '',
-        },
-      ],
+      resources: [],
     };
   },
   async created() {
