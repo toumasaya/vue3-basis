@@ -45,6 +45,7 @@ import ResourceSearch from '@/components/ResourceSearch';
 import ResourceList from '@/components/ResourceList';
 import ResourceDetail from '@/components/ResourceDetail';
 import ResourceUpdate from '@/components/ResourceUpdate';
+import { fetchResources } from '@/actions';
 
 export default {
   components: {
@@ -82,6 +83,10 @@ export default {
         },
       ],
     };
+  },
+  async created() {
+    const response = await fetchResources();
+    console.log(response);
   },
   computed: {
     resourceLength() {
