@@ -33,10 +33,13 @@
             <label class="label">Type</label>
             <div class="control">
               <div class="select">
-                <select>
-                  <option>book</option>
-                  <option>video</option>
-                  <option>blog</option>
+                <select v-model="uResource.type">
+                  <option
+                    v-for="resourceType in resourceTypes"
+                    :key="resourceType"
+                    :value="resourceType"
+                    >{{ resourceType }}</option
+                  >
                 </select>
               </div>
             </div>
@@ -74,6 +77,7 @@ export default {
   data() {
     return {
       uResource: { ...this.resource },
+      resourceTypes: ['book', 'video', 'blog'],
     };
   },
   watch: {
