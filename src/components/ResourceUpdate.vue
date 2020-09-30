@@ -9,26 +9,47 @@
       <div class="content">
         <form action="">
           <div class="field">
-            <label class="label">Name</label>
+            <label class="label">Title</label>
             <div class="control">
-              <input class="input" type="text" placeholder="Text input" />
+              <input
+                v-model="uResource.title"
+                class="input"
+                type="text"
+                placeholder="Resource title here..."
+              />
             </div>
           </div>
           <div class="field">
-            <label class="label">Name</label>
+            <label class="label">Description</label>
             <div class="control">
-              <input class="input" type="text" placeholder="Text input" />
+              <textarea
+                v-model="uResource.description"
+                class="textarea"
+                placeholder="Resource description..."
+              ></textarea>
             </div>
           </div>
           <div class="field">
-            <label class="label">Subject</label>
+            <label class="label">Type</label>
             <div class="control">
               <div class="select">
                 <select>
-                  <option>Select dropdown</option>
-                  <option>With options</option>
+                  <option>book</option>
+                  <option>video</option>
+                  <option>blog</option>
                 </select>
               </div>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Link</label>
+            <div class="control">
+              <input
+                v-model="uResource.link"
+                class="input"
+                type="text"
+                placeholder="Resource link..."
+              />
             </div>
           </div>
           <div class="field is-grouped">
@@ -46,7 +67,16 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    resource: Object,
+  },
+  data() {
+    return {
+      uResource: { ...this.resource },
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped></style>

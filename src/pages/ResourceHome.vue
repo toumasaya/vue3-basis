@@ -11,7 +11,7 @@
             </button>
           </h2>
           <ResourceDetail v-if="isDetailView" :resource="activeResource" />
-          <ResourceUpdate v-else />
+          <ResourceUpdate v-else :resource="activeResource" />
         </div>
         <div class="column is-4">
           <h3 class="title aside-title is-size-4 has-text-grey">
