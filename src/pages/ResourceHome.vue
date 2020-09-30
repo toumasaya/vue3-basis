@@ -11,7 +11,11 @@
             </button>
           </h2>
           <ResourceDetail v-if="isDetailView" :resource="activeResource" />
-          <ResourceUpdate v-else :resource="activeResource" />
+          <ResourceUpdate
+            v-else
+            :resource="activeResource"
+            @on-resource-update="hydrateResource"
+          />
         </div>
         <div class="column is-4">
           <h3 class="title aside-title is-size-4 has-text-grey">
@@ -105,6 +109,10 @@ export default {
     },
     selectResource(selectedResource) {
       this.selectedResource = selectedResource;
+    },
+    hydrateResource(newResource) {
+      console.log('hydrate');
+      console.log(newResource);
     },
   },
 };
