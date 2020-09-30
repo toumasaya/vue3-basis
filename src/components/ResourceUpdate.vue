@@ -1,4 +1,8 @@
 <template>
+  <div v-if="alert?.success" class="notification is-success is-light">
+    <button class="delete"></button>
+    {{ alert.success }}
+  </div>
   <div class="card">
     <header class="card-header">
       <p class="card-header-title">
@@ -80,6 +84,10 @@ export default {
     return {
       uResource: { ...this.resource },
       resourceTypes: ['book', 'video', 'blog'],
+      alert: {
+        success: null,
+        error: null,
+      },
     };
   },
   emits: ['on-resource-update'],
@@ -90,11 +98,13 @@ export default {
   },
   methods: {
     async submitForm() {
+      this.alert = { success: null, error: null };
       const updatedResource = await updateResource(
         this.uResource._id,
         this.uResource
       );
       this.$emit('on-resource-update', updatedResource);
+      this.alert.success = 'Resource is updated! :)';
     },
   },
 };
