@@ -5,12 +5,12 @@
       <div class="resource-content columns">
         <div class="column is-8">
           <h2 class="title is-size-4">
-            Resource {{ selectedResource?.id }}
+            Resource {{ activeResource?.id }}
             <button @click="toggleView" :class="toggleBtnClass" class="button">
               {{ isDetailView ? 'Update' : 'Detail' }}
             </button>
           </h2>
-          <ResourceDetail v-if="isDetailView" :resource="selectedResource" />
+          <ResourceDetail v-if="isDetailView" :resource="activeResource" />
           <ResourceUpdate v-else />
         </div>
         <div class="column is-4">
@@ -23,10 +23,16 @@
               <ResourceSearch />
             </div>
             <div class="resource-list">
-              <ResourceList :resources="resources" @on-item-click="selectResource" />
+              <ResourceList
+                :resources="resources"
+                :activeId="activeResource?.id"
+                @on-item-click="selectResource"
+              />
             </div>
           </nav>
-          <button @click="addResource" class="button is-primary">Add Resource</button>
+          <button @click="addResource" class="button is-primary">
+            Add Resource
+          </button>
         </div>
       </div>
     </div>
@@ -83,6 +89,14 @@ export default {
     },
     toggleBtnClass() {
       return this.isDetailView ? 'is-warning' : '';
+    },
+    hasResource() {
+      return this.resourceLength > 0;
+    },
+    activeResource() {
+      return (
+        this.selectedResource || (this.hasResource && this.resources[0]) || null
+      );
     },
   },
   methods: {
