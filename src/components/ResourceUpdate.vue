@@ -104,6 +104,10 @@ export default {
     setAlert(type, message) {
       this.alert = this.initAlert();
       this.alert[type] = message;
+      setTimeout(() => {
+        this.alert = this.initAlert();
+        alert('Alert is gone');
+      }, 3000);
     },
     async submitForm() {
       try {
