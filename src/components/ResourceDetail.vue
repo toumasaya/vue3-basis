@@ -21,8 +21,12 @@
       </div>
     </div>
     <footer class="card-footer">
-      <a href="#" class="card-footer-item is-primary">Edit</a>
-      <a href="#" class="card-footer-item">Cancel</a>
+      <a :href="resource.link" target="_blank" class="card-footer-item">Link</a>
+      <router-link
+        :to="{ name: 'resourceDetail', params: { id: resource._id } }"
+        class="card-footer-item"
+        >Detail Page</router-link
+      >
     </footer>
   </div>
 </template>
