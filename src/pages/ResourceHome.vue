@@ -21,11 +21,16 @@
         </template>
       </h2>
       <ResourceDetail v-if="isDetailView" :resource="activeResource">
-        <router-link
-          :to="{ name: 'resourceDetail', params: { id: activeResource?._id } }"
-          class="card-footer-item"
-          >Detail Page</router-link
-        >
+        <template #buttonLink>
+          <router-link
+            :to="{
+              name: 'resourceShow',
+              params: { id: activeResource?._id },
+            }"
+            class="card-footer-item"
+            >Detail Page</router-link
+          >
+        </template>
       </ResourceDetail>
       <ResourceUpdate
         v-else

@@ -22,7 +22,7 @@
     </div>
     <footer class="card-footer">
       <a :href="resource.link" target="_blank" class="card-footer-item">Link</a>
-      <slot></slot>
+      <slot name="buttonLink"></slot>
     </footer>
   </div>
 </template>

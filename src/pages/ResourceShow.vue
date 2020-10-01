@@ -1,8 +1,10 @@
 <template>
   <ResourceDetail :resource="resource">
-    <a @click="$router.go(-1)" class="card-footer-item">
-      Back
-    </a>
+    <template #buttonLink>
+      <a @click="$router.go(-1)" class="card-footer-item">
+        Back
+      </a>
+    </template>
   </ResourceDetail>
 </template>
 
