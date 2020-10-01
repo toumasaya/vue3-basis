@@ -1,5 +1,13 @@
 import axios from 'axios';
 
+export function fetchUser() {
+  return new Promise((res) => {
+    setTimeout(() => {
+      res({ name: 'Luffy' });
+    }, 2000);
+  });
+}
+
 export function fetchResources() {
   return axios.get('/api/resources').then((response) => response.data);
 }
