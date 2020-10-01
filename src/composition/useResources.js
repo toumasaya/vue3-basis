@@ -1,5 +1,6 @@
 import { onMounted, ref, computed } from 'vue';
 import { fetchResources } from '@/actions';
+import useSearch from './useSearch';
 
 export default function useResources() {
   const resources = ref([]);
@@ -21,11 +22,14 @@ export default function useResources() {
   const resourceLength = computed(() => resources.value.length);
   const hasResources = computed(() => resourceLength.value > 0);
 
+  const { searchedResources, setSearchQuery } = useSearch(resources);
+
   return {
-    resources,
+    resources: searchedResources,
     getResources,
     resourceLength,
     hasResources,
     hydrateResource,
+    setSearchQuery,
   };
 }

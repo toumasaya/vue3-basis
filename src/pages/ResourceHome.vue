@@ -68,7 +68,6 @@ import ResourceList from '@/components/ResourceList';
 import ResourceDetail from '@/components/ResourceDetail';
 import ResourceUpdate from '@/components/ResourceUpdate';
 import ResourceDelete from '@/components/ResourceDelete';
-import { searchResources } from '@/actions';
 import useResources from '@/composition/useResources';
 
 export default {
@@ -124,11 +123,7 @@ export default {
       this.selectResource(resourceToSelect);
     },
     async handleSearch(title) {
-      if (!title) {
-        this.getResources();
-        return;
-      }
-      this.resources = await searchResources(title);
+      this.setSearchQuery(title);
       this.selectedResource = null;
     },
   },
