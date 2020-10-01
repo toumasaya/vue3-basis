@@ -1,21 +1,5 @@
 <template>
-  <nav class="navbar is-black">
-    <div class="navbar-brand">
-      <router-link :to="{ name: 'resourceHome' }" class="navbar-item"
-        >Brand Name</router-link
-      >
-    </div>
-    <div class="navbar-end">
-      <div class="navbar-item">
-        <suspense>
-          <template #default>
-            <UserPanel />
-          </template>
-          <template #fallback>Loading...</template>
-        </suspense>
-      </div>
-    </div>
-  </nav>
+  <div id="teleportContent"></div>
   <div class="section">
     <div class="container">
       <ResourceHeader />
@@ -26,13 +10,11 @@
 
 <script>
 import ResourceHeader from '@/components/ResourceHeader';
-import UserPanel from '@/components/UserPanel';
 
 export default {
   name: 'App',
   components: {
     ResourceHeader,
-    UserPanel,
   },
 };
 </script>

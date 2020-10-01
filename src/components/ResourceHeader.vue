@@ -1,4 +1,23 @@
 <template>
+  <teleport to="#teleportContent">
+    <nav class="navbar is-black">
+      <div class="navbar-brand">
+        <router-link :to="{ name: 'resourceHome' }" class="navbar-item"
+          >Brand Name</router-link
+        >
+      </div>
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <suspense>
+            <template #default>
+              <UserPanel />
+            </template>
+            <template #fallback>Loading...</template>
+          </suspense>
+        </div>
+      </div>
+    </nav>
+  </teleport>
   <header class="app-header">
     <h1 class="title">Keep Resources</h1>
     <p class="desc">Keep your resource at once place</p>
@@ -18,7 +37,13 @@
 </template>
 
 <script>
-export default {};
+import UserPanel from '@/components/UserPanel';
+
+export default {
+  components: {
+    UserPanel,
+  },
+};
 </script>
 
 <style lang="scss" scoped></style>
