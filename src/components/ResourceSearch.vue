@@ -1,18 +1,18 @@
 <template>
-  <div class="field has-addons">
-    <div class="control">
-      <input class="input" type="text" placeholder="Find resource" />
-    </div>
-    <div class="control">
-      <a class="button is-primary">
-        Search
-      </a>
-    </div>
+  <div class="control">
+    <input
+      @keyup="$emit('on-search', $event.target.value)"
+      class="input"
+      type="text"
+      placeholder="Find resource"
+    />
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  emits: ['on-search'],
+};
 </script>
 
 <style lang="scss" scoped></style>

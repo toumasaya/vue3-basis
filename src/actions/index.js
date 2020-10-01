@@ -4,6 +4,12 @@ export function fetchResources() {
   return axios.get('/api/resources').then((response) => response.data);
 }
 
+export function searchResources(title) {
+  return axios
+    .get(`/api/resources/s/${title}`)
+    .then((response) => response.data);
+}
+
 export function fetchResourceByIdAPI(resourceID) {
   return axios
     .get(`/api/resources/${resourceID}`)

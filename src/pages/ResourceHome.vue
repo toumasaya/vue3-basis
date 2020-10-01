@@ -45,7 +45,7 @@
       </h3>
       <nav class="panel ">
         <div class="panel-block">
-          <ResourceSearch />
+          <ResourceSearch @on-search="handleSearch" />
         </div>
         <div class="resource-list">
           <ResourceList
@@ -68,7 +68,7 @@ import ResourceList from '@/components/ResourceList';
 import ResourceDetail from '@/components/ResourceDetail';
 import ResourceUpdate from '@/components/ResourceUpdate';
 import ResourceDelete from '@/components/ResourceDelete';
-import { fetchResources } from '@/actions';
+import { fetchResources, searchResources } from '@/actions';
 
 export default {
   components: {
@@ -85,9 +85,8 @@ export default {
       resources: [],
     };
   },
-  async created() {
-    const resources = await fetchResources();
-    this.resources = resources;
+  created() {
+    this.getResources();
   },
   computed: {
     resourceLength() {
@@ -108,6 +107,10 @@ export default {
     },
   },
   methods: {
+    async getResources() {
+      const resources = await fetchResources();
+      this.resources = resources;
+    },
     toggleView() {
       this.isDetailView = !this.isDetailView;
     },
@@ -124,6 +127,12 @@ export default {
         this.resources.splice(index, 1);
         this.selectResource(this.resources[0] || null);
       }
+    },
+    async handleSearch(title) {
+      if (!title) {
+        this.getResources();
+      }
+      this.resources = await searchResources(title);
     },
   },
 };
