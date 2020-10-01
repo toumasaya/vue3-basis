@@ -98,14 +98,8 @@ export default {
     return { ...useResources() };
   },
   computed: {
-    resourceLength() {
-      return this.resources.length;
-    },
     toggleBtnClass() {
       return this.isDetailView ? 'is-black' : '';
-    },
-    hasResources() {
-      return this.resourceLength > 0;
     },
     activeResource() {
       return (
