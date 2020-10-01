@@ -13,7 +13,7 @@
           </button>
           <ResourceDelete
             @on-resource-delete="
-              hydrateResource($event, 'delete');
+              handleResourceChange($event, 'delete');
               !hasResources ? (isDetailView = true) : null;
             "
             :activeId="activeResource?._id"
@@ -35,7 +35,7 @@
       <ResourceUpdate
         v-else
         :resource="activeResource"
-        @on-resource-update="hydrateResource($event, 'update')"
+        @on-resource-update="handleResourceChange($event, 'update')"
       />
     </div>
     <div class="column is-4">
@@ -116,16 +116,12 @@ export default {
     selectResource(selectedResource) {
       this.selectedResource = selectedResource;
     },
-    hydrateResource(newResource, operation) {
-      const index = this.resources.findIndex((r) => r._id === newResource._id);
+    handleResourceChange(newResource, operation) {
+      this.hydrateResource(newResource, operation);
+      const resourceToSelect =
+        operation === 'update' ? newResource : this.resources[0] || null;
 
-      if (operation === 'update') {
-        this.resources[index] = newResource;
-        this.selectResource(newResource);
-      } else {
-        this.resources.splice(index, 1);
-        this.selectResource(this.resources[0] || null);
-      }
+      this.selectResource(resourceToSelect);
     },
     async handleSearch(title) {
       if (!title) {
