@@ -22,11 +22,7 @@
     </div>
     <footer class="card-footer">
       <a :href="resource.link" target="_blank" class="card-footer-item">Link</a>
-      <router-link
-        :to="{ name: 'resourceDetail', params: { id: resource._id } }"
-        class="card-footer-item"
-        >Detail Page</router-link
-      >
+      <slot></slot>
     </footer>
   </div>
 </template>
