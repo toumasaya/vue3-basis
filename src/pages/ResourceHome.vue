@@ -131,8 +131,10 @@ export default {
     async handleSearch(title) {
       if (!title) {
         this.getResources();
+        return;
       }
       this.resources = await searchResources(title);
+      this.selectedResource = null;
     },
   },
 };

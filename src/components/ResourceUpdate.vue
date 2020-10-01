@@ -7,7 +7,14 @@
     <button class="delete"></button>
     {{ alert.error }}
   </div>
-  <div class="card">
+  <div v-if="!resource?._id" class="card">
+    <div class="card-content">
+      <div class="content">
+        <p>No resource is selected...</p>
+      </div>
+    </div>
+  </div>
+  <div v-else class="card">
     <header class="card-header">
       <p class="card-header-title">
         Resource Name
@@ -42,7 +49,7 @@ export default {
   emits: ['on-resource-update'],
   watch: {
     resource(newResource, previousResource) {
-      if (newResource && newResource._id !== previousResource._id) {
+      if (newResource?._id !== previousResource?._id) {
         this.clearAlertTimeout();
         this.alert = this.initAlert();
       }
