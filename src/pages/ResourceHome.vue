@@ -68,7 +68,8 @@ import ResourceList from '@/components/ResourceList';
 import ResourceDetail from '@/components/ResourceDetail';
 import ResourceUpdate from '@/components/ResourceUpdate';
 import ResourceDelete from '@/components/ResourceDelete';
-import { fetchResources, searchResources } from '@/actions';
+import { searchResources } from '@/actions';
+import useResources from '@/composition/useResources';
 
 export default {
   components: {
@@ -82,11 +83,19 @@ export default {
     return {
       isDetailView: true,
       selectedResource: null,
-      resources: [],
     };
   },
-  created() {
-    this.getResources();
+  setup() {
+    // syntax 1
+    // const { resources, getResources } = useResources();
+    // return { resources, getResources };
+
+    // syntax 2
+    // const { ...resourcesAPI } = useResources();
+    // return { ...resourcesAPI };
+
+    // syntax 3
+    return { ...useResources() };
   },
   computed: {
     resourceLength() {
@@ -107,10 +116,6 @@ export default {
     },
   },
   methods: {
-    async getResources() {
-      const resources = await fetchResources();
-      this.resources = resources;
-    },
     toggleView() {
       this.isDetailView = !this.isDetailView;
     },
