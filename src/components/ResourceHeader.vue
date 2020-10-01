@@ -32,18 +32,25 @@
         class="button is-primary is-outlined"
         >New</router-link
       >
+      <SettingsModal />
     </div>
   </header>
 </template>
 
 <script>
 import UserPanel from '@/components/UserPanel';
+import SettingsModal from '@/components/SettingsModal';
 
 export default {
   components: {
     UserPanel,
+    SettingsModal,
   },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="sass" scoped>
+.buttons
+  justify-content: center
+  margin-top: 1rem
+</style>
