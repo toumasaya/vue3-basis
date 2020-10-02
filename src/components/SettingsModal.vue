@@ -36,7 +36,7 @@ export default {
         fontSize: this.fontSize,
         theme: this.theme,
       };
-      alert(JSON.stringify(settings));
+      localStorage.setItem('resources-settings', JSON.stringify(settings));
       this.isOpen = false;
     },
   },
