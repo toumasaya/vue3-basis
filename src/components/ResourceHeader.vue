@@ -18,7 +18,7 @@
       </div>
     </nav>
   </teleport>
-  <header class="app-header">
+  <header :class="['app-header', getTheme()]">
     <h1 class="title">Keep Resources</h1>
     <p class="desc">Keep your resource at once place</p>
     <div class="buttons">
@@ -46,6 +46,7 @@ export default {
     UserPanel,
     SettingsModal,
   },
+  inject: ['getTheme'],
 };
 </script>
 
@@ -53,4 +54,14 @@ export default {
 .buttons
   justify-content: center
   margin-top: 1rem
+
+.app-header
+  .title
+    margin-bottom: 0.5rem
+
+.app-header.dark
+  .title
+    color: hsl(0, 0%, 96%)
+  .desc
+    color: hsl(0, 0%, 71%)
 </style>

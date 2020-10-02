@@ -1,9 +1,11 @@
 <template>
   <div id="teleportContent"></div>
-  <div class="section">
-    <div class="container">
-      <ResourceHeader />
-      <router-view />
+  <div :class="['resources-app', theme]">
+    <div class="section">
+      <div class="container">
+        <ResourceHeader />
+        <router-view />
+      </div>
     </div>
   </div>
 </template>
@@ -16,6 +18,28 @@ export default {
   components: {
     ResourceHeader,
   },
+  data() {
+    return {
+      settings: this.getSettings(),
+    };
+  },
+  provide() {
+    return {
+      getTheme: () => this.theme,
+      setSettings: (settings) => (this.settings = settings),
+    };
+  },
+  computed: {
+    theme() {
+      return this.settings?.theme ? this.settings.theme : '';
+    },
+  },
+  methods: {
+    getSettings() {
+      const settings = localStorage.getItem('resources-settings');
+      return settings ? JSON.parse(settings) : {};
+    },
+  },
 };
 </script>
 
@@ -26,4 +50,10 @@ export default {
 
 .navbar-brand
   font-weight: bold
+
+.resources-app
+  min-height: 100vh
+
+.resources-app.dark
+  background: hsl(0, 0%, 14%)
 </style>

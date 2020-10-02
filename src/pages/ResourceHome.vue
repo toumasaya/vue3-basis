@@ -1,7 +1,7 @@
 <template>
   <div class="resource-content columns">
     <div class="column is-8">
-      <h2 class="title is-size-4">
+      <h2 :class="['detail-title', 'title', 'is-size-4', getTheme()]">
         Resource {{ activeResource?._id }}
         <template v-if="hasResources">
           <button
@@ -78,6 +78,7 @@ export default {
     ResourceUpdate,
     ResourceDelete,
   },
+  inject: ['getTheme'],
   data() {
     return {
       isDetailView: true,
@@ -141,6 +142,9 @@ export default {
   background: hsl(0, 0%, 48%)
   color: #fff
   font-size: 1rem
+
+.detail-title.dark
+  color: hsl(0, 0%, 71%)
 
 .aside-title
   display: flex

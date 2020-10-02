@@ -30,6 +30,7 @@ export default {
       theme: 'dark',
     };
   },
+  inject: ['setSettings'],
   methods: {
     submitSettings() {
       const settings = {
@@ -37,6 +38,7 @@ export default {
         theme: this.theme,
       };
       localStorage.setItem('resources-settings', JSON.stringify(settings));
+      this.setSettings(settings);
       this.isOpen = false;
     },
   },

@@ -3,7 +3,7 @@
     v-for="resource in resources"
     :key="resource._id"
     @click="onItemClick(resource)"
-    :class="['panel-block', activeItemClass(resource)]"
+    :class="['panel-block', getTheme(), activeItemClass(resource)]"
   >
     <header class="header">
       <h3 class="title is-size-6">{{ resource.title }}</h3>
@@ -22,6 +22,7 @@ export default {
     },
     activeId: String,
   },
+  inject: ['getTheme'],
   computed: {
     activeItemClass() {
       // return function(resource) {
@@ -45,6 +46,19 @@ export default {
 <style lang="sass" scoped>
 .panel-block
   flex-direction: column
+  &.dark
+    background: hsl(0, 0%, 29%)
+    border-bottom-color: hsl(0, 0%, 48%)
+    .header .title
+      color: hsl(0, 0%, 71%)
+    .desc
+      color: hsl(0, 0%, 48%)
+  &.dark.is-active,
+  &.dark:hover
+    background: whitesmoke
+    border-bottom-color: hsl(0, 0%, 48%)
+    .header .title
+      color: hsl(0, 0%, 14%)
   &.is-active
     background: whitesmoke
   .header
