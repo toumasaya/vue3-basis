@@ -7,22 +7,36 @@
     @on-close="isOpen = false"
     @on-submit="submitSettings"
   >
-    <div>My content</div>
+    <SettingsForm v-model:fontSize="fontSize" v-model:theme="theme" />
+    <!--would be the follow -->
+    <!-- <SettingsForm
+      v-model:fontSize="fontSize"
+      v-model:theme="theme"
+      @update:fontSize="fontSize = $event"
+      @update:theme="theme = $event" /> -->
   </Modal>
 </template>
 
 <script>
 import Modal from '@/components/shared/Modal';
+import SettingsForm from '@/components/SettingsForm';
 
 export default {
-  components: { Modal },
+  components: { Modal, SettingsForm },
   data() {
     return {
       isOpen: false,
+      fontSize: '16',
+      theme: 'dark',
     };
   },
   methods: {
     submitSettings() {
+      const settings = {
+        fontSize: this.fontSize,
+        theme: this.theme,
+      };
+      alert(JSON.stringify(settings));
       this.isOpen = false;
     },
   },
